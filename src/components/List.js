@@ -1,10 +1,15 @@
 import React from 'react'
 import Card from './Card'
-const List = ({title}) => {
+
+const List = ({ title, cards }) => {
     return(
         <div>
             <h4>{title}</h4>
-            <Card />
+            {cards.map(card => (
+                <Card text={card.text} />
+
+            )
+            )}
         </div>
     )
 }
