@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Card = ({text}) => {
+const Taskcard = ({text}) => {
     return(
         <div>
             <p>{text}</p>
         </div>
     )
 }
-export default Card
+export default Taskcard

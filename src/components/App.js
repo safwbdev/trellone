@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
-import './../App.css';
+// import './../App.css';
 import List from './List'
 import { connect } from 'react-redux'
+import { Container, Row } from 'react-bootstrap';
 
 class App extends Component{
   render(){
     const { lists } = this.props;
     
     return (
-      <div className="App">
-        <h2>Hell there</h2>
-          { lists.map(list => <List title={list.title} cards={list.cards} />)}
-      </div>
+      <Container className="App">
+        <h2>Hello there</h2>
+        <Row>
+
+        { lists.map(list => (
+          <List 
+          title={list.title} 
+          cards={list.cards} />
+          ))}
+        </Row>
+      </Container>
     );
   } 
 }
