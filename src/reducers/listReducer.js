@@ -15,7 +15,7 @@ const initialState = [
     },
     {
         title: "a second list ",
-        id: 0,
+        id: 1,
         cards: [
             {
                 id:0,
