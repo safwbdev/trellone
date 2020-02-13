@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button, Card } from 'react-bootstrap';
 import TextareaAutosize from 'react-textarea-autosize';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 
 class ActionButton extends React.Component {
@@ -19,10 +21,11 @@ class ActionButton extends React.Component {
     renderAddButton = () => {
         const { list } = this.props;
 
-        const buttonText = list ? "+ Add another List" : "+ Add another Card";
+        const buttonText = list ? "Add another List" : "Add another Card";
 
         return (
-            <Button onClick={this.openForm}>{buttonText}</Button>
+            <Button onClick={this.openForm}>
+            <FontAwesomeIcon icon={faPlus} />{" "}{buttonText}</Button>
         )
 
     }
@@ -41,22 +44,24 @@ class ActionButton extends React.Component {
         const { list } = this.props;
         const placeholder = list ? "Enter List Title" : "Enter Card Text";
         const buttonTitle = list ? "Add List" : "Add Card";
+
         return <div>
-            <Card>
-                <TextareaAutosize 
-                    placeholder={placeholder}
-                    autoFocus
-                    onBlur={this.closeForm}
-                    value={this.state.text}
-                    onChange={this.handleInputChange} />
-            </Card>
-            <div>
-                <Button>
-                    {buttonTitle}{" "}
-                </Button>
-                <Button>Close</Button>
+                <Card>
+                    <TextareaAutosize 
+                        placeholder={placeholder}
+                        autoFocus
+                        onBlur={this.closeForm}
+                        value={this.state.text}
+                        onChange={this.handleInputChange} />
+                </Card>
+                <div>
+                    <Button>
+                        {buttonTitle}
+                    </Button>{" "}
+                    <Button>
+                    <FontAwesomeIcon icon={faTimes} /></Button>
+                </div>
             </div>
-        </div>
     }
 
     render() {
