@@ -16,6 +16,7 @@ class App extends Component{
 
         { lists.map(list => (
           <List 
+            listID={list.id}
             key={list.id}
             title={list.title} 
             cards={list.cards} />

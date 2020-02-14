@@ -3,6 +3,8 @@ import { Button, Card } from 'react-bootstrap';
 import TextareaAutosize from 'react-textarea-autosize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux'
+import { addList, addCard } from '../actions'
 
 
 class ActionButton extends React.Component {
@@ -18,6 +20,32 @@ class ActionButton extends React.Component {
         )
     }
 
+    handleAddList = () => {
+        const { dispatch } = this.props;
+        const { text } = this.state;
+
+        if (text) {
+            this.setState({
+                text:""
+            })
+            dispatch(addList(text))
+        }
+
+        return;
+    }
+    handleAddCard = () => {
+        const { dispatch, listID } = this.props;
+        const { text } = this.state;
+
+        if (text) {
+            this.setState({
+                text:""
+            })
+            dispatch(addCard(listID, text))
+        }
+
+    }
+
     renderAddButton = () => {
         const { list } = this.props;
 
@@ -25,9 +53,9 @@ class ActionButton extends React.Component {
 
         return (
             <Button onClick={this.openForm}>
-            <FontAwesomeIcon icon={faPlus} />{" "}{buttonText}</Button>
+                <FontAwesomeIcon icon={faPlus} />{" "}{buttonText}
+            </Button>
         )
-
     }
     closeForm = () => {
         this.setState({
@@ -55,11 +83,10 @@ class ActionButton extends React.Component {
                         onChange={this.handleInputChange} />
                 </Card>
                 <div>
-                    <Button>
+                    <Button onMouseDown={list ? this.handleAddList : this.handleAddCard}>
                         {buttonTitle}
                     </Button>{" "}
-                    <Button>
-                    <FontAwesomeIcon icon={faTimes} /></Button>
+                    <Button><FontAwesomeIcon icon={faTimes} /></Button>
                 </div>
             </div>
     }
@@ -69,4 +96,4 @@ class ActionButton extends React.Component {
     }
 }
 
-export default ActionButton
+export default connect()(ActionButton)
