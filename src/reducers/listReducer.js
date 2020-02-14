@@ -1,34 +1,34 @@
 import { CONSTANTS } from '../actions'
 
 let listID = 2;
-let cardID = 2;
+let cardID = 4;
 
 const initialState = [
     {
         title: "new title",
-        id: 0,
+        id: `list-${0}`,
         cards: [
             {
-                id:0,
-                text: "card 1 ipdum"
+                id:`card-${0}`,
+                text: "egon"
             },
             {
-                id:1,
-                text: "second card"
+                id:`card-${1}`,
+                text: "winston"
             }
         ]
     },
     {
         title: "a second list ",
-        id: 1,
+        id: `list-${1}`,
         cards: [
             {
-                id:0,
-                text: "card 1 ipdum"
+                id:`card-${2}`,
+                text: "peter"
             },
             {
-                id:1,
-                text: "second card"
+                id:`card-${3}`,
+                text: "ray"
             }
         ]
     }
@@ -41,7 +41,7 @@ const listReducer = (state = initialState, action) => {
             const newList = {
                 title: action.payload,
                 cards: [],
-                id: listID
+                id: `list-${listID}`
             };
             listID+= 1;
             
@@ -50,7 +50,7 @@ const listReducer = (state = initialState, action) => {
         case CONSTANTS.ADD_CARD:
             const newCard = {
                 text: action.payload.text,
-                id: cardID
+                id: `card-${cardID}`
             };
             cardID += 1
 
