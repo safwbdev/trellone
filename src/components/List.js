@@ -2,32 +2,44 @@ import React from 'react'
 import Taskcard from './Taskcard'
 import { Col, Card } from 'react-bootstrap'
 import ActionButton from './ActionButton'
-import { Droppable } from 'react-beautiful-dnd'
+import { Droppable, Draggable } from 'react-beautiful-dnd'
 
-const List = ({ title, cards, listID }) => {
+const List = ({ title, cards, listID, index }) => {
     return(
-        <Droppable droppableId={String(listID)}>
+        <Draggable draggableId={String(listID)} index={index}>
             {provided => (
-            <Col {...provided.droppableProps} ref={provided.innerRef} sm={3}>
-                <Card>
-                    <Card.Body>
-                        <Card.Title>{title}</Card.Title>   
-                            {cards.map((card, index) => (
-                                <Taskcard 
-                                key={card.id} 
-                                id={card.id}
-                                index={index}
-                                text={card.text} />
-                                
-                                )
-                                )}
-                            <ActionButton listID={listID} />
-                            {provided.placeholder}
-                    </Card.Body>
-                </Card>
+                <Col 
+                    {...provided.draggableProps} 
+                    ref={provided.innerRef} 
+                    ref={provided.innerRef} 
+                    {...provided.draggableProps} 
+                    sm={2}>
+            <Droppable droppableId={String(listID)}>
+                {provided => (
+                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                    <Card>
+                        <Card.Body>
+                            <Card.Title>{title}</Card.Title>   
+                                {cards.map((card, index) => (
+                                    <Taskcard 
+                                    key={card.id} 
+                                    id={card.id}
+                                    index={index}
+                                    text={card.text} />
+                                    
+                                    )
+                                    )}
+                                <ActionButton listID={listID} />
+                                {provided.placeholder}
+                        </Card.Body>
+                    </Card>
+                </div>
+                )}
+            </Droppable>
             </Col>
+
             )}
-        </Droppable>
+        </Draggable>
     )
 }
 export default List
