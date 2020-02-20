@@ -5,30 +5,44 @@ let cardID = 4;
 
 const initialState = [
     {
-        title: "new title",
+        title: "To Do",
         id: `list-${0}`,
         cards: [
             {
                 id:`card-${0}`,
-                text: "egon"
+                text: "Make card & list titles editable"
             },
             {
                 id:`card-${1}`,
-                text: "winston"
+                text: "fix placeholder bug"
             }
         ]
     },
     {
-        title: "a second list ",
+        title: "In Progress ",
         id: `list-${1}`,
         cards: [
             {
                 id:`card-${2}`,
-                text: "peter"
+                text: "Create more cards & lists"
             },
             {
                 id:`card-${3}`,
                 text: "ray"
+            }
+        ]
+    },
+    {
+        title: "Complete",
+        id: `list-${2}`,
+        cards: [
+            {
+                id:`card-${4}`,
+                text: "Create trello clone"
+            },
+            {
+                id:`card-${5}`,
+                text: "make lists draggable"
             }
         ]
     }

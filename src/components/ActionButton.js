@@ -108,12 +108,17 @@ class ActionButton extends React.Component {
                 </Card>
                 <div style={styles.formButtonGroup}>
                     <Button 
-                    onMouseDown={list ? this.handleAddList : this.handleAddCard}
+                        onMouseDown={list ? this.handleAddList : this.handleAddCard}
                         variant="contained" 
-                        style={{color:"white", backgroundColor:"#5aac44"}}>
+                        style={{
+                            color:"white", 
+                            backgroundColor:"#5aac44"}}>
                             {buttonTitle} {" "}
                     </Button>
-                    <ClearIcon style={{ marginLeft:8, cursor: "pointer"}} />
+                    <ClearIcon style={{ 
+                        marginLeft:8, 
+                        cursor: "pointer"}}
+                        onMouseDown={this.closeForm} />
                 </div>
             </div>
     }

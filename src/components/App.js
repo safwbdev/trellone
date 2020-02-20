@@ -6,6 +6,7 @@ import ActionButton from './ActionButton'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { sort } from '../actions'
 import styled from 'styled-components'
+import { AppBar, Typography, Toolbar, Container } from '@material-ui/core';
 
 const ListContainer = styled.div`
   display: flex;
@@ -36,25 +37,35 @@ class App extends Component{
     
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="App">
-          <h2>Trellone</h2>
-          <Droppable droppableId="all-lists" direction="horizontal" type="list">
-            {provided => (
-              <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
-              { lists.map((list, index) => (
-                <List 
-                listID={list.id}
-                key={list.id}
-                title={list.title} 
-                cards={list.cards}
-                index={index} />
-                ))}
-                {provided.placeholder}
-                <ActionButton list />
-              </ListContainer>
-            )}
-          </Droppable>
-        </div>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6">Trellone</Typography>
+            </Toolbar>
+          </AppBar>
+          <Container 
+            style={{
+              maxWidth:"unset",
+              marginTop:20}}>
+            <Droppable 
+              droppableId="all-lists" 
+              direction="horizontal" 
+              type="list">
+              {provided => (
+                <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
+                { lists.map((list, index) => (
+                  <List 
+                  listID={list.id}
+                  key={list.id}
+                  title={list.title} 
+                  cards={list.cards}
+                  index={index} />
+                  ))}
+                  {provided.placeholder}
+                  <ActionButton list />
+                </ListContainer>
+              )}
+            </Droppable>
+          </Container>
       </DragDropContext>
     );
   } 
