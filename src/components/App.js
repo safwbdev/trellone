@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import './../App.scss';
+// import './../App.scss';
 import List from './List'
 import { connect } from 'react-redux'
-import { Container, Row } from 'react-bootstrap';
 import ActionButton from './ActionButton'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { sort } from '../actions'
+import styled from 'styled-components'
 
+const ListContainer = styled.div`
+  display: flex;
+  flexDirection: row;
+`;
 class App extends Component{
 
   onDragEnd = (result) => {
@@ -36,7 +40,7 @@ class App extends Component{
           <h2>Trellone</h2>
           <Droppable droppableId="all-lists" direction="horizontal" type="list">
             {provided => (
-              <Row {...provided.droppableProps} ref={provided.innerRef}>
+              <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
               { lists.map((list, index) => (
                 <List 
                 listID={list.id}
@@ -47,7 +51,7 @@ class App extends Component{
                 ))}
                 {provided.placeholder}
                 <ActionButton list />
-              </Row>
+              </ListContainer>
             )}
           </Droppable>
         </div>
@@ -55,6 +59,14 @@ class App extends Component{
     );
   } 
 }
+
+const styles = {
+  listsContainer: {
+    display: "flex",
+    flexDirection: "row"
+  }
+}
+
 const mapStateToProps = state => ({
   lists: state.lists
 });

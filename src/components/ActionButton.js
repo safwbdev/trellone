@@ -1,10 +1,12 @@
 import React from 'react'
-import { Button, Card } from 'react-bootstrap';
+import Card from "@material-ui/core/Card";
 import TextareaAutosize from 'react-textarea-autosize';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
+import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
 import { addList, addCard } from '../actions'
+import { Button } from '@material-ui/core';
+
 
 
 class ActionButton extends React.Component {
@@ -50,11 +52,22 @@ class ActionButton extends React.Component {
         const { list } = this.props;
 
         const buttonText = list ? "Add another List" : "Add another Card";
+        const buttonTextOpacity = list ? 1 : 0.5;
+        const buttonTextColor = list ? "white" : "inherit";
+        const buttonTextBackground = list ? "rgba(0,0,0,.15" : "inherit";
 
         return (
-            <Button onClick={this.openForm}>
-                <FontAwesomeIcon icon={faPlus} />{" "}{buttonText}
-            </Button>
+            <div 
+            style={{
+                ...styles.openFormButtonGroup,
+                opacity: buttonTextOpacity,
+                color: buttonTextColor,
+                backgroundColor:buttonTextBackground
+            }}
+            onClick={this.openForm}>
+                <AddIcon />
+                <span>{buttonText}</span>
+            </div>
         )
     }
     closeForm = () => {
@@ -74,25 +87,57 @@ class ActionButton extends React.Component {
         const buttonTitle = list ? "Add List" : "Add Card";
 
         return <div>
-                <Card>
+                <Card style={{
+                    minHeight:80,
+                    minWidth:272,
+                    padding: "6px 8px 2px"
+                }}>
                     <TextareaAutosize 
                         placeholder={placeholder}
                         autoFocus
                         onBlur={this.closeForm}
                         value={this.state.text}
+                        style={{
+                            resize:"none",
+                            width:"100%",
+                            outline:"none",
+                            overflow:"hidden",
+                            border:"none"
+                        }}
                         onChange={this.handleInputChange} />
                 </Card>
-                <div>
-                    <Button onMouseDown={list ? this.handleAddList : this.handleAddCard}>
-                        {buttonTitle}
-                    </Button>{" "}
-                    <Button><FontAwesomeIcon icon={faTimes} /></Button>
+                <div style={styles.formButtonGroup}>
+                    <Button 
+                    onMouseDown={list ? this.handleAddList : this.handleAddCard}
+                        variant="contained" 
+                        style={{color:"white", backgroundColor:"#5aac44"}}>
+                            {buttonTitle} {" "}
+                    </Button>
+                    <ClearIcon style={{ marginLeft:8, cursor: "pointer"}} />
                 </div>
             </div>
     }
 
     render() {
         return this.state.formOpen ? this.renderForm() : this.renderAddButton() ;
+    }
+}
+
+const styles = {
+    openFormButtonGroup: {
+    display:"flex",
+    alignItems:"center",
+    cursor:"pointer",
+    borderRadius:3,
+    height:36,
+    width:272,
+    paddingLeft:10
+    },
+    formButtonGroup: {
+        marginTop: 8,
+        display: "flex",
+        alignItems: "center"
+
     }
 }
 
